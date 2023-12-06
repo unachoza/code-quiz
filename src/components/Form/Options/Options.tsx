@@ -1,17 +1,15 @@
 import "./Options.css"
 import data from "../../../data/data.json"
+//@ts-ignore
+const Options = ({quiz}:string): JSX.Element  => {
+    console.log(quiz)
 
-const Options = (): JSX.Element  => {
-
-    let htmlQuiz = (data.quizzes.filter((q:any) => q.title == "HTML")).shift()
-    console.log(htmlQuiz!.questions[0].options)
-
+    let htmlQuiz = (data.quizzes.filter((q:any) => q.title == quiz)).shift()
     return(
         <div className="options-container">
-           { htmlQuiz ?
-           htmlQuiz!.questions[0].options.map( (option: string) => {
-           return <li >{option}</li>;
-        }): "nothing"}
+           { htmlQuiz?.questions[0].options.map( (option: string) => {
+                return <li>{option}</li>;
+            })}
         </div>
     )
 }
