@@ -6,7 +6,7 @@ export interface PropsButton {
   
 const Button = ({ text, onClick }: PropsButton): JSX.Element => {
     return (
-      <button className="button" role="button" onClick={onClick}>
+      <button className="button" role="button" value={text} onClick={onClick}>
         {text}
       </button>
     );
