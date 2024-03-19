@@ -1,5 +1,5 @@
     //@ts-nocheck
-import React, { MouseEventHandler } from 'react';
+import React, { MouseEventHandler, useState,  } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Button from './components/Button/Button'
@@ -10,13 +10,12 @@ import { clickOptions } from '@testing-library/user-event/dist/click';
 
 const quizNames = [ "HTML", "CSS", "JavaScript","Accessibility" ]
 
-function App() {
-
-  let selectedQuiz:string = ""
+const App = () =>  {
+const [selectedQuiz, setSelectedQuiz] = useState("")
 
   const selectQuiz = (event: MouseEventHandler<HTMLButtonElement>) => {
-    selectedQuiz = (data?.quizzes.filter((q:any) => q.title == event.target.name)).shift()
-    return selectedQuiz
+    let selectQuiz = (data?.quizzes.filter((q:any) => q.title == event.target.name)).shift()
+    setSelectedQuiz(event.target.value)
   }
 
   return (
@@ -26,7 +25,7 @@ function App() {
       </div>
       <div className='Options-container'>
         <h1>Pick a Subject to get Started</h1>
-        {quizNames.map((name:string) => <Button text={name} onClick={(e) => selectQuiz(e)} />)}
+        {quizNames.map((name:string, i: number) => <Button key={i} text={name} onClick={(e) => selectQuiz(e)} />)}
       <Options quiz={selectedQuiz}/>
       </div>
      <Button text="Submit Answer" onClick={(e)=> console.log("clicked", e)}/>
